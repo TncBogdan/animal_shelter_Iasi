@@ -11,15 +11,14 @@ public class CatAdapter {
     public static Cat toCat(CatDTO catDTO) {
         return (Cat) new Cat().setName(catDTO.getName())
                 .setPhoto(catDTO.getPhoto());
-
     }
 
-    public static CatDTO toDTO(Cat cat){
+    public static CatDTO toDTO(Cat cat) {
         return new CatDTO(cat.getId(), cat.getName(), cat.getPhoto());
     }
 
-    public static List<CatDTO>catDTOList(List<Cat>cats){
-        List<CatDTO>catDTOS = new ArrayList<>();
+    public static List<CatDTO> catDTOList(List<Cat> cats) {
+        List<CatDTO> catDTOS = new ArrayList<>();
         cats.forEach(cat -> catDTOS.add(toDTO(cat)));
         return catDTOS;
     }

@@ -1,13 +1,14 @@
 package com.tnc.repository.shelter;
 
+import com.tnc.repository.cat.Cat;
+import com.tnc.repository.dog.Dog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Shelter {
@@ -17,6 +18,15 @@ public class Shelter {
     private Long id;
     private String name;
     private String location;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "shelter_id")
+    List<Cat> cats = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "shelter_id")
+    List<Dog> dogs = new ArrayList<>();
+
 
     public Shelter() {
     }
@@ -51,6 +61,24 @@ public class Shelter {
 
     public Shelter setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    public List<Cat> getCats() {
+        return cats;
+    }
+
+    public Shelter setCats(List<Cat> cats) {
+        this.cats = cats;
+        return this;
+    }
+
+    public List<Dog> getDogs() {
+        return dogs;
+    }
+
+    public Shelter setDogs(List<Dog> dogs) {
+        this.dogs = dogs;
         return this;
     }
 }
